@@ -32,7 +32,8 @@
           <!--<banner :slides="homeData.slides"></banner>-->
           <banner :slides="staticHomeDataSlides"></banner>
           <!-- 分类 -->
-          <category v-if="homeData.advertesPicture" :category="homeData.category" :advertesPicture="homeData.advertesPicture.PICTURE_ADDRESS"></category>
+          <!--<category v-if="homeData.advertesPicture" :category="homeData.category" :advertesPicture="homeData.advertesPicture.PICTURE_ADDRESS"></category>-->
+          <category :category="staticHomeDataCategory" ></category>
           <!-- 推荐商品 -->
           <recommend :recommend="homeData.recommend"></recommend>
           <!-- 楼层商品 -->
@@ -96,16 +97,80 @@ export default {
       homeData: {}, // 首页数据，正常写法
       staticHomeDataSlides: [
         {
-          imageUrl: "http://images.baixingliangfan.cn/advertesPicture/20180407/20180407175040_1780.jpg",
+          image: "http://img63.ddimg.cn/upload_img/00785/ts0428_0510/1242x366-1587972958.jpg",
           goodsId: "b1195296679f482aa7d54d95ac2b4a94"
         },
         {
-          imageUrl: "@/assets/imgs/slides2.jpeg",
+          image: require("@/assets/imgs/slides1.jpeg"),
+          goodsId: "b11sf4d1f510vd6a7d51vd5s1v165a14"
+        },
+        {
+          image: "http://img63.ddimg.cn/upload_img/00803/1/1242x366-1588053862.jpg",
           goodsId: "da34d6f381464a219b37a9ac0ad579e8"
         },
         {
-          imageUrl: "@/assets/imgs/slides3.jpeg",
+          image: "http://img60.ddimg.cn/upload_img/00817/ershoushu/100-1564985916.jpg",
           goodsId: "ad176e397858448a854dc50371334faf"
+        },
+        {
+          image: "http://img60.ddimg.cn/upload_img/00478/0609/czs-750x315-1587892307.jpg",
+          goodsId: "ada1s639df58448a854dc5156165461d"
+        },
+        {
+          image: "http://img63.ddimg.cn/topic_img/gys_04584/750x315zyhrj.jpg",
+          goodsId: "ada1s6csa1548a8541984062cdf8v1d5"
+        }
+      ],
+      staticHomeDataCategory: [
+        {
+          mallCategoryId: "1",
+          image: require("@/assets/imgs/category1.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "2",
+          image: require("@/assets/imgs/category2.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "3",
+          image: require("@/assets/imgs/category3.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "4",
+          image: require("@/assets/imgs/category4.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "5",
+          image: require("@/assets/imgs/category5.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "6",
+          image: require("@/assets/imgs/category6.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "7",
+          image: require("@/assets/imgs/category7.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "8",
+          image: require("@/assets/imgs/category8.jpg"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "9",
+          image: require("@/assets/imgs/category9.png"),
+          mallCategoryName: "1"
+        },
+        {
+          mallCategoryId: "10",
+          image: require("@/assets/imgs/category10.jpg"),
+          mallCategoryName: "1"
         }
       ],
       probeType: 3, // 不仅在屏幕滑动的过程中，而且在 momentum 滚动动画运行过程中实时派发 scroll 事件

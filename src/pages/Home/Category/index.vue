@@ -4,12 +4,12 @@
     <ul v-show="category && category.length">
       <li v-for="(item, index) in category" :key="item.mallCategoryId">
         <img v-lazy="item.image" alt="" @click="clickCategory(item, index)" />
-        <p>{{ item.mallCategoryName }}</p>
+        <!--<p>{{ item.mallCategoryName }}</p>-->
       </li>
     </ul>
-    <section class="ad">
+    <!--<section class="ad">
       <img v-lazy="advertesPicture" alt="" />
-    </section>
+    </section>-->
   </div>
 </template>
 
@@ -17,8 +17,8 @@
 export default {
   name: "Category",
   props: {
-    category: { type: Array, default: () => [] },
-    advertesPicture: { type: String, default: "" }
+    category: { type: Array, default: () => [] }
+    //advertesPicture: { type: String, default: "" }
   },
   methods: {
     clickCategory(item, index) {

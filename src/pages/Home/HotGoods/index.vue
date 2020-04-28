@@ -1,7 +1,7 @@
 <template>
   <div id="hot-goods">
     <section class="title">
-      <span class="name">热卖商品</span>
+      <span class="name">为你推荐</span>
     </section>
     <ul>
       <li

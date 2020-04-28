@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color: #b532e9;
+$color: #F79709;
 
 #title {
   background: #ededed;

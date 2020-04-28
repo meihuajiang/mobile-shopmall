@@ -1,6 +1,6 @@
 <template>
   <div id="swiper-wrapper">
-    <p class="title">商品推荐</p>
+    <p class="title">热卖商品</p>
     <swiper :options="swiperOption">
       <swiper-slide
         class="recommend-item"
@@ -71,6 +71,7 @@ export default {
         let res = await ajax.addToShopCart(goodsId);
         this.$toast(res.msg);
       } catch (error) {
+        // eslint-disable-next-line no-constant-condition
         if ((error.response && error.response.status === 401) || 400)
           this.$router.push({ name: "Login" });
         console.log(error);
