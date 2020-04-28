@@ -169,7 +169,7 @@ export default {
             title: "Tip",
             message: `定位到您所在城市：${res.locationCity}`,
             confirmButtonText: "确认",
-            confirmButtonColor: "#b532e9"
+            confirmButtonColor: "#F79709"
           })
           .then(() => {
             this.setLocationCity(res.locationCity);
