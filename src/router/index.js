@@ -1,28 +1,70 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Router from "vue-router";
 
-Vue.use(VueRouter);
+const Home = () => import("@/pages/Home"); // 首页
+const Login = () => import("@/pages/Login"); // 登录、注册
+const City = () => import("@/pages/City");
+const Cart = () => import("@/pages/Cart");
+const Category = () => import("@/pages/Category");
+const User = () => import("@/pages/User");
+Vue.use(Router);
+/**
+ * keepAlive 需要缓存的页面
+ */
+const router = new Router({
+  mode: "history",
+  routes: [
+    { path: "/", redirect: { name: "Home" } },
+    {
+      path: "/home",
+      name: "Home",
+      component: Home,
+      meta: { keepAlive: true, index: 1 }
+    }, // 首页
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
-];
+    {
+      path: "/city",
+      name: "City",
+      component: City,
+      meta: { keepAlive: true, index: 2 }
+    }, // 城市选择
+    { path: "/login", name: "Login", component: Login, meta: { index: 3 } }, // 登录、注册
+    {
+      path: "/cart",
+      name: "Cart",
+      component: Cart,
+      meta: { keepAlive: true, index: 4 }
+    },
+    {
+      path: "/category",
+      name: "Category",
+      component: Category,
+      meta: { keepAlive: true, index: 5 }
+    },
+    {
+      path: "/user",
+      name: "User",
+      component: User,
+      meta: { keepAlive: true, index: 6 }
+    },
+    { path: "*", redirect: { name: "Home" } }
+  ]
+});
 
-const router = new VueRouter({
-  routes
+const title = {
+  Home: "网上书城",
+  City: "城市选择",
+  Login: "登录 / 注册",
+  Cart: "购物车",
+  Category: "分类",
+  User: "我的"
+};
+
+// 注册全局导航前置钩子用来拦截导航
+router.beforeEach((to, from, next) => {
+  // 设置页面标题
+  document.title = title[to.name];
+  next();
 });
 
 export default router;
