@@ -7,6 +7,7 @@ const City = () => import("@/pages/City");
 const Cart = () => import("@/pages/Cart");
 const Category = () => import("@/pages/Category");
 const User = () => import("@/pages/User");
+const Rank =()=>import("@/pages/Rank");
 Vue.use(Router);
 /**
  * keepAlive 需要缓存的页面
@@ -21,7 +22,6 @@ const router = new Router({
       component: Home,
       meta: { keepAlive: true, index: 1 }
     }, // 首页
-
     {
       path: "/city",
       name: "City",
@@ -47,6 +47,12 @@ const router = new Router({
       component: User,
       meta: { keepAlive: true, index: 6 }
     },
+    {
+      path: "/rank",
+      name: "Rank",
+      component: Rank,
+      meta: { keepAlive: true, index: 7 }
+    },
     { path: "*", redirect: { name: "Home" } }
   ]
 });
@@ -57,7 +63,8 @@ const title = {
   Login: "登录 / 注册",
   Cart: "购物车",
   Category: "分类",
-  User: "我的"
+  User: "我的",
+  Rank: "排行榜"
 };
 
 // 注册全局导航前置钩子用来拦截导航

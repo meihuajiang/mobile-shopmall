@@ -15,13 +15,13 @@
 .header {
 	height: 11.5vw;
 	line-height: 11.5vw;
-	background: #eee;
+	background: #F79709;
 	display: flex;
 	// position: relative;
 	// z-index: 10;
 	.city {
 		flex-basis: 18%;
-		font-size: 12px;
+		font-size: 14px;
 		text-align: center;
 	}
 	.search-box {
@@ -60,7 +60,7 @@
 		// top: 0;
 		// right: 12px;
 		margin-right: 5px;
-		font-size: 16px;
+		font-size: 14px;
 	}
 }
 

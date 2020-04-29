@@ -22,9 +22,10 @@ $color:#F79709;
     }
     .name {
       padding: 5px 0 0 7.5px;
-      text-align: left;
+      text-align: center;
       overflow: hidden;
       font-size: 13px;
+      //color: $color;
       text-overflow: ellipsis;
       white-space: nowrap;
     }

@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color: #F79709;
+$color: #f79709;
 
 .letter-container {
   position: fixed;

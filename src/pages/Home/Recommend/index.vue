@@ -1,6 +1,6 @@
 <template>
   <div id="swiper-wrapper">
-    <p class="title">热卖商品</p>
+    <p class="title">为你推荐</p>
     <swiper :options="swiperOption">
       <swiper-slide
         class="recommend-item"
@@ -10,6 +10,8 @@
         <img
           v-lazy="item.image"
           class="recommend-img"
+          width="300"
+          height="180"
           @click="goGoodsDetails(item)"
         />
         <p class="name">{{ item.goodsName }}</p>
@@ -42,7 +44,7 @@ export default {
   mixins: [GoodsMixin],
   components: { swiper, swiperSlide },
   props: {
-    recommend: { type: Array, default: () => [] }
+    //recommend: { type: Array, default: () => [] }
   },
   data() {
     return {
@@ -53,7 +55,58 @@ export default {
           el: ".swiper-pagination",
           clickable: true
         }
-      }
+      },
+      recommend: [
+        {
+          image: require("@/assets/imgs/recommend1.jpeg"),
+          mallPrice: 26.8,
+          goodsId: "1",
+          price: 16.8,
+          goodsName: "光"
+        },
+        {
+          image: require("@/assets/imgs/recommend2.png"),
+          mallPrice: 36.8,
+          goodsId: "2",
+          price: 16.8,
+          goodsName: "想念少年的你"
+        },
+        {
+          image: require("@/assets/imgs/recommend3.png"),
+          mallPrice: 46.8,
+          goodsId: "3",
+          price: 16.8,
+          goodsName: "查令十字街84号"
+        },
+        {
+          image: require("@/assets/imgs/recommend4.png"),
+          mallPrice: 56.8,
+          goodsId: "3",
+          price: 16.8,
+          goodsName: "杨绛传"
+        },
+        {
+          image: require("@/assets/imgs/recommend5.png"),
+          mallPrice: 66.8,
+          goodsId: "3",
+          price: 16.8,
+          goodsName: "孤独是生命的礼物"
+        },
+        {
+          image: require("@/assets/imgs/recommend6.png"),
+          mallPrice: 76.8,
+          goodsId: "3",
+          price: 16.8,
+          goodsName: "万事有心，人间有味"
+        },
+        {
+          image: require("@/assets/imgs/recommend7.png"),
+          mallPrice: 16.8,
+          goodsId: "3",
+          price: 16.8,
+          goodsName: "苏东坡传"
+        }
+      ]
     };
   },
   methods: {

@@ -10,7 +10,7 @@ FastClick.attach(document.body);
 import "@/assets/css/reset.css";
 import "@/assets/css/border.css";
 import "@/assets/css/index.css";
-import "@/assets/css/icon.styl";
+
 
 require("./utils/adapter")(document, window);
 

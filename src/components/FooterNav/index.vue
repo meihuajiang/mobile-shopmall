@@ -7,7 +7,9 @@
       :class="{ active: activeNavIndex === index }"
       @click="clickTab(index, item.name)"
     >
-      <van-icon :name="item.icon" />
+      <!--后期实时修改badge-->
+      <van-icon v-if="item.name === 'Cart'" :name="item.icon" :badge="goodsNumber"/>
+      <van-icon v-if="item.name !== 'Cart'" :name="item.icon" />
       <div>{{ item.title }}</div>
     </section>
   </footer>
@@ -24,9 +26,11 @@ export default {
       NavList: [
         { title: "首页", name: "Home", icon: "wap-home" },
         { title: "分类", name: "Category", icon: "wap-nav" },
+        { title: "排行榜", name: "Rank", icon: "medal" },
         { title: "购物车", name: "Cart", icon: "shopping-cart" },
         { title: "我的", name: "User", icon: "manager" }
-      ]
+      ],
+      goodsNumber: 0
     };
   },
   methods: {

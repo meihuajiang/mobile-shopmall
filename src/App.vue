@@ -38,7 +38,7 @@ export default {
       isShowNav: false, // 是否显示底部导航 Tab
       activeNavIndex: 0, // 底部导航激活下标
       isRouterAlive: true, // 用于刷新页面用
-      navTabs: ["Home", "Category", "Cart", "User"] // 底部导航
+      navTabs: ["Home", "Category", "Rank", "Cart", "User"] // 底部导航
     };
   },
   watch: {
@@ -56,11 +56,14 @@ export default {
         case "Category":
           this.activeNavIndex = 1;
           break;
-        case "Cart":
+        case "Rank":
           this.activeNavIndex = 2;
           break;
-        case "User":
+        case "Cart":
           this.activeNavIndex = 3;
+          break;
+        case "User":
+          this.activeNavIndex = 4;
           break;
       }
 

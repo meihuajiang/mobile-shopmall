@@ -14,7 +14,8 @@
       </transition>
     </header>
     <!-- 内容区 -->
-    <section class="content" v-if="homeData" @touchstart.prevent="touchstart" @touchmove.prevent="touchmove" @touchend.prevent="touchend">
+    <!--<section class="content" v-if="homeData" @touchstart.prevent="touchstart" @touchmove.prevent="touchmove" @touchend.prevent="touchend">-->
+    <section class="content"  @touchstart.prevent="touchstart" @touchmove.prevent="touchmove" @touchend.prevent="touchend">
       <b-scroll
         class="content-scroll"
         ref="homeScrollRef"
@@ -352,6 +353,7 @@ export default {
      */
     changeCity() {
       this.$router.push({ name: "City" });
+      //this.$router.push({ name: "Rank" });
     },
     /**
      * 监听子组件派发事件 | 获取实时滚动位置坐标
