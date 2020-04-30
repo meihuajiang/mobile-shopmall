@@ -10,7 +10,7 @@
         :key="item.goodsId"
         @click="goGoodsDetails(item)"
       >
-        <img v-lazy="item.image" class="hot-goods-img" />
+        <img v-lazy="item.image" height="180" width="300" class="hot-goods-img" />
         <p class="name">{{ item.name }}</p>
         <p class="price">
           <span class="code">￥</span>
@@ -29,7 +29,41 @@ export default {
   name: "HotGoods",
   mixins: [GoodsMixin],
   props: {
-    hotGoods: { type: Array, default: () => [] }
+    //hotGoods: { type: Array, default: () => [] }
+  },
+  data() {
+    return {
+      hotGoods: [
+        {
+          mallPrice: 13.90,
+          image: require("@/assets/imgs/hotGoods1.jpeg"),
+          goodsId: "1",
+          price: 13.90,
+          name: "书"
+        },
+        {
+          mallPrice: 23.90,
+          image: require("@/assets/imgs/hotGoods2.png"),
+          goodsId: "2",
+          price: 23.90,
+          name: "目送"
+        },
+        {
+          mallPrice: 33.90,
+          image: require("@/assets/imgs/hotGoods3.png"),
+          goodsId: "3",
+          price: 33.90,
+          name: "偷影子的人"
+        },
+        {
+          mallPrice: 43.90,
+          image: require("@/assets/imgs/hotGoods4.png"),
+          goodsId: "4",
+          price: 43.90,
+          name: "解忧杂货店"
+        }
+      ]
+    }
   }
 };
 </script>
