@@ -43,10 +43,10 @@ export default {
         },
         {
           mallPrice: 23.90,
-          image: require("@/assets/imgs/hotGoods2.png"),
+          image: require("@/assets/imgs/xiamu.png"),
           goodsId: "2",
           price: 23.90,
-          name: "目送"
+          name: "夏目友人帐"
         },
         {
           mallPrice: 33.90,

@@ -33,6 +33,7 @@ export default {
       if (this.outOrder) {
         // 退出订单支付页
         this.$emit("outOrderEvt");
+        //this.$emit("backEvt");
         return;
       }
 

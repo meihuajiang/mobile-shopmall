@@ -9,12 +9,13 @@ const Category = () => import("@/pages/Category");
 const User = () => import("@/pages/User");
 const Rank = () => import("@/pages/Rank");
 const GoodsDetails = () => import("@/pages/GoodsDetails");
+const Order = () => import("@/pages/Order");
 Vue.use(Router);
 /**
  * keepAlive 需要缓存的页面
  */
 const router = new Router({
-  mode: "history",
+  mode: "hash",
   routes: [
     { path: "/", redirect: { name: "Home" } },
     {
@@ -60,6 +61,12 @@ const router = new Router({
       component: GoodsDetails,
       meta: { keepAlive: true, index: 8}
     },
+    {
+      path: "order",
+      name: "Order",
+      component: Order,
+      mate: { keepAlive: true, index: 9}
+    },
     { path: "*", redirect: { name: "Home" } }
   ]
 });
@@ -71,7 +78,9 @@ const title = {
   Cart: "购物车",
   Category: "分类",
   User: "我的",
-  Rank: "排行榜"
+  Rank: "排行榜",
+  GoodsDetails: "商品详情",
+  Order: "下单"
 };
 
 // 注册全局导航前置钩子用来拦截导航
