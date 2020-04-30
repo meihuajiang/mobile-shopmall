@@ -7,7 +7,8 @@ const City = () => import("@/pages/City");
 const Cart = () => import("@/pages/Cart");
 const Category = () => import("@/pages/Category");
 const User = () => import("@/pages/User");
-const Rank =()=>import("@/pages/Rank");
+const Rank = () => import("@/pages/Rank");
+const GoodsDetails = () => import("@/pages/GoodsDetails");
 Vue.use(Router);
 /**
  * keepAlive 需要缓存的页面
@@ -52,6 +53,12 @@ const router = new Router({
       name: "Rank",
       component: Rank,
       meta: { keepAlive: true, index: 7 }
+    },
+    {
+      path: "goodsDetails",
+      name: "GoodsDetails",
+      component: GoodsDetails,
+      meta: { keepAlive: true, index: 8}
     },
     { path: "*", redirect: { name: "Home" } }
   ]
