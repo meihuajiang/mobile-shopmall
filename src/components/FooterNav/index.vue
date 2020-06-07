@@ -8,7 +8,11 @@
       @click="clickTab(index, item.name)"
     >
       <!--后期实时修改badge-->
-      <van-icon v-if="item.name === 'Cart'" :name="item.icon" :badge="goodsNumber"/>
+      <van-icon
+        v-if="item.name === 'Cart'"
+        :name="item.icon"
+        :badge="goodsNumber"
+      />
       <van-icon v-if="item.name !== 'Cart'" :name="item.icon" />
       <div>{{ item.title }}</div>
     </section>
@@ -43,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color: #F79709;
+$color: #f79709;
 
 #tabNav {
   position: fixed;

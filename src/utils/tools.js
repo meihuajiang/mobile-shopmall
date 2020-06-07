@@ -46,7 +46,7 @@ function throttle(fn, delay, atleast = 0) {
       timer && clearTimeout(timer); // 清除上次定时器
       timer = setTimeout(() => {
         fn.apply(this, args);
-        console.log('else');
+        console.log("else");
         previous = 0;
       }, delay);
     }
@@ -70,7 +70,7 @@ const chunk = (arr, size) => {
  * @param String value 搜索框里面的内容
  */
 const keyword = (str, value) => {
-  const replaceReg = new RegExp(value, 'g');
+  const replaceReg = new RegExp(value, "g");
   const replaceString = `<span style='color:red'>${value}</span>`;
   str = str.replace(replaceReg, replaceString);
   return str;

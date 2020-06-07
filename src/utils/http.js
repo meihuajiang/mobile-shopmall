@@ -11,9 +11,10 @@ import { Dialog } from "vant";
 /**
  * 数据请求 | 封装 axios
  */
-
-axios.defaults.timeout = 10000; // 默认超时设置 10s
-axios.defaults.withCredentials = true; // 表示跨域请求时是否需要使用凭证
+// 默认超时设置 10s
+axios.defaults.timeout = 10000;
+// 表示跨域请求时是否需要使用凭证
+axios.defaults.withCredentials = false;
 // axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '/v1' : '/api'; // 相对路径设置
 
 /**
@@ -105,8 +106,10 @@ export function get(url, params = {}) {
       .then(res => {
         if (res.status === 200) {
           if (res.data || !res.data.code) {
+            console.log("get成功");
             // 请求成功
             resolve(res.data);
+            //console.log(res.data);
           } else {
             // 请求错误
             reject(res);
@@ -138,7 +141,9 @@ export function post(url, data = {}) {
         if (res.status === 200) {
           if (res.data || !res.data.code) {
             // 请求成功
+            console.log("请求成功");
             resolve(res.data);
+            //console.log(res.data);
           } else {
             // 请求错误
             reject(res);
@@ -150,7 +155,7 @@ export function post(url, data = {}) {
         }
       })
       .catch(error => {
-        // console.log('网络错误!');
+        console.log("网络错误!");
         reject(error);
       });
   });

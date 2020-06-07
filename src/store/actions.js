@@ -66,7 +66,7 @@ export default {
   setBrowseHistory, // 设置浏览历史列表
   deleteOneBrowseHistory, // 删除一条浏览历史
   setUserToken, // 设置用户 token
-  deleteUserToken, // 删除用户 token
+  deleteUserToken // 删除用户 token
   //setAddressInfo, // 设置地址信息
   //deleteAddressInfo // 删除地址信息
 };

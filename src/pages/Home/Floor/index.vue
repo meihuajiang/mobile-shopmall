@@ -43,7 +43,8 @@ export default {
   name: "Floor",
   mixins: [GoodsMixin],
   components: { FloorTitle },
-  //props: ["floorName", "floor", "num"],
+  props: ["floorName", "floor", "num"]
+  /*
   data() {
     return {
       floorName: [["动漫"],["电子书"],["小说"]],
@@ -128,7 +129,7 @@ export default {
         ]
       ]
     };
-  }
+  }*/
 };
 </script>
 

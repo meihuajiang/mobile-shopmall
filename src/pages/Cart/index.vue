@@ -1,119 +1,152 @@
 <template>
   <div id="cart">
     <topbar title="购物车" hasBack></topbar>
-    <section class="cartMain">
-      <div class="cartMain_hd">
-        <ul class="order_lists cartTop">
-          <li class="list_chk">
-            <!--所有商品全选-->
-            <input
-              type="checkbox"
-              id="all"
-              class="whole_check"
-              @click="cartChoose()"
-            />
-            <label for="all" :class="status ? 'mark' : ''">全选</label>
-          </li>
-          <!--<li class="list_con">商品信息</li>
+    <section
+      class="content"
+      @touchstart.prevent="touchstart"
+      @touchmove.prevent="touchmove"
+      @touchend.prevent="touchend"
+    >
+      <b-scroll
+        class="content-scroll"
+        ref="cartScrollRef"
+        :listenScroll="listenScroll"
+        :probeType="probeType"
+        :pullup="true"
+        :bounce="bounce"
+        v-on:scroll="cartScroll"
+        v-on:scrollEnd="cartScrollEnd"
+      >
+        <section class="cartMain">
+          <div class="cartMain_hd">
+            <ul class="order_lists cartTop">
+              <li class="list_chk">
+                <!--所有商品全选-->
+                <input
+                  type="checkbox"
+                  id="all"
+                  class="whole_check"
+                  @click="cartChoose()"
+                />
+                <label for="all" :class="status ? 'mark' : ''">全选</label>
+              </li>
+              <!--<li class="list_con">商品信息</li>
           <li class="list_info">商品参数</li>
           <li class="list_price">单价</li>
           <li class="list_amount">数量</li>
           <li class="list_sum">金额</li>
           <li class="list_op">操作</li>-->
-        </ul>
-      </div>
-      <br /><br />
-      <div class="cartBox" v-for="(item, index) in list" :key="index">
-        <!--        <div class="order_content">-->
-        <!--          <ul class="order_lists" v-for="pro in item.products">-->
-        <li class="list_chk">
-          <input
-            type="checkbox"
-            id="checkbox_2"
-            class="son_check"
-            @click="choose(item)"
-          />
-          <a for="checkbox_2" :class="item.checked ? 'mark' : ''"></a>
-        </li>
-        <li class="list_con">
-          <div class="list_img">
-            <a href="javascript:;"><img :src="item.imgUl" alt=""/></a>
+            </ul>
           </div>
-          <div class="list_text">
-            <a href="javascript:;">{{ item.title }}</a>
-            <span class="list_custom"></span>
+          <br /><br />
+          <div class="cartBox" v-for="(item, index) in list" :key="index">
+            <!--        <div class="order_content">-->
+            <!--          <ul class="order_lists" v-for="pro in item.products">-->
+            <li class="list_chk">
+              <input
+                type="checkbox"
+                id="checkbox_2"
+                class="son_check"
+                @click="choose(item)"
+              />
+              <a for="checkbox_2" :class="item.checked ? 'mark' : ''"></a>
+            </li>
+            <li class="list_con">
+              <div class="list_img">
+                <a href="javascript:;"><img :src="item.imgUl" alt=""/></a>
+              </div>
+              <div class="list_text">
+                <a href="javascript:;">{{ item.title }}</a>
+                <span class="list_custom"></span>
+              </div>
+            </li>
+            <li class="list_price">
+              <p class="price">单价：￥{{ item.price }}</p>
+              <div class="charge">
+                <p>更多促销</p>
+              </div>
+            </li>
+            <li class="list_amount">
+              <div class="amount_box">
+                <a
+                  href="javascript:;"
+                  class="reduce reSty"
+                  @click="reduce(item)"
+                  >数量：-</a
+                >
+                <input type="text" v-model="item.num" class="sum" />
+                <a href="javascript:;" class="plus" @click="add(item)">+</a>
+              </div>
+            </li>
+            <li class="list_sum">
+              <p class="sum_price">商品金额：￥{{ item.sum }}</p>
+            </li>
+            <li class="list_op">
+              <p class="collect">
+                <a href="javascript:;" class="colBtn">加入收藏夹</a>
+              </p>
+              <p class="del">
+                <a href="javascript:;" class="delBtn">移除该商品</a>
+              </p>
+            </li>
+            <br /><br /><br />
+            <!--          </ul>-->
+            <!--        </div>-->
           </div>
-        </li>
-        <li class="list_price">
-          <p class="price">单价：￥{{ item.price }}</p>
-          <div class="charge">
-            <p>更多促销</p>
-          </div>
-        </li>
-        <li class="list_amount">
-          <div class="amount_box">
-            <a href="javascript:;" class="reduce reSty" @click="reduce(item)"
-              >数量：-</a
-            >
-            <input type="text" v-model="item.num" class="sum" />
-            <a href="javascript:;" class="plus" @click="add(item)">+</a>
-          </div>
-        </li>
-        <li class="list_sum">
-          <p class="sum_price">商品金额：￥{{ item.sum }}</p>
-        </li>
-        <li class="list_op">
-          <p class="collect">
-            <a href="javascript:;" class="colBtn">加入收藏夹</a>
-          </p>
-          <p class="del">
-            <a href="javascript:;" class="delBtn">移除该商品</a>
-          </p>
-        </li>
-        <br /><br /><br />
-        <!--          </ul>-->
-        <!--        </div>-->
-      </div>
 
-      <br /><br />
-      <!--底部-->
-      <div class="bar-wrapper">
-        <div class="bar-right">
-          <div class="piece">
-            已选商品<strong class="piece_num">{{ this.allnum }}</strong
-            >件
+          <br /><br />
+          <!--底部-->
+          <div class="bar-wrapper">
+            <div class="bar-right">
+              <div class="piece">
+                已选商品<strong class="piece_num">{{ this.allnum }}</strong
+                >件
+              </div>
+              <div class="totalMoney">
+                共计: <strong class="total_text">￥{{ this.allsum }}</strong>
+              </div>
+              <div class="calBtn"><a href="javascript:;">去结算</a></div>
+            </div>
           </div>
-          <div class="totalMoney">
-            共计: <strong class="total_text">￥{{ this.allsum }}</strong>
+        </section>
+        <section class="model_bg"></section>
+        <section class="my_model">
+          <p class="title">删除宝贝<span class="closeModel"></span></p>
+          <p>您确认要删除该宝贝吗？</p>
+          <div class="opBtn">
+            <a href="javascript:;" class="dialog-sure">确定</a>
+            <br />
+            <a href="javascript:;" class="dialog-close">关闭</a>
           </div>
-          <div class="calBtn"><a href="javascript:;">去结算</a></div>
-        </div>
-      </div>
-    </section>
-    <section class="model_bg"></section>
-    <section class="my_model">
-      <p class="title">删除宝贝<span class="closeModel"></span></p>
-      <p>您确认要删除该宝贝吗？</p>
-      <div class="opBtn">
-        <a href="javascript:;" class="dialog-sure">确定</a>
-        <br />
-        <a href="javascript:;" class="dialog-close">关闭</a>
-      </div>
+        </section>
+      </b-scroll>
     </section>
   </div>
 </template>
 
 <script>
 import Topbar from "@/components/TopBar";
+import BScroll from "@/components/BScroll";
 export default {
   components: {
-    Topbar
+    Topbar,
+    BScroll
   },
   data() {
     return {
       status: false, //全选选中状态
       allsum: 0, //总计价格
       allnum: 0, //总计数量
+      listenScroll: true, // 监听滚动位置
+      probeType: 3, // 不仅在屏幕滑动的过程中，而且在 momentum 滚动动画运行过程中实时派发 scroll 事件
+      scrollY: 0, // 实时滚动的 Y 坐标
+      bounce: { top: true }, // 当滚动超过边缘的时候顶部会有一小段回弹动画
+      touch: {},
+      isRotate: false,
+      isTrans: false,
+      translateY: 0,
+      rotate: 0,
+      opac: 0,
       list: [
         {
           title: "李清照传",
@@ -248,7 +281,36 @@ export default {
         this.allsum += diffsum; //计算总价
         this.allnum += diffnum; //计算总量
       }
-    }
+    },
+    // eslint-disable-next-line no-unused-vars
+    cartScroll(pos) {},
+    cartScrollEnd() {
+      this.$refs.cartScrollRef.refresh();
+    },
+    // eslint-disable-next-line no-unused-vars
+    //contentScroll(pos) {},
+    /**
+     * 触摸开始 | 当用户在触摸平面上放置了一个触点时触发
+     */
+    touchstart(event) {
+      this.touch.init = true;
+      this.touch.startY = event.touches[0].pageY;
+    },
+    /**
+     * 触摸移动 | 当用户在触摸平面上移动触点时触发
+     */
+    touchmove(event) {
+      let moveY = event.touches[0].pageY;
+      let distanceY = moveY - this.touch.startY;
+      this.translateY = Math.max(0, distanceY / 3.5);
+      this.rotate = Math.max(0, Math.min(360, distanceY));
+      this.translateY > 80 && (this.isRotate = true);
+      this.opac = distanceY / 320;
+    },
+    /**
+     * 触摸结束 | 当一个触点被用户从触摸平面上移除
+     */
+    touchend() {}
   }
 };
 </script>

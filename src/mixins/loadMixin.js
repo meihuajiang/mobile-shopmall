@@ -3,7 +3,7 @@ export const loadMixin = {
     return {
       dataList: [], // 数据列表
       dataTotal: 0, // 数据总数
-      isLoading: false, // 定义是否加载（锁）
+      isLoading: false // 定义是否加载（锁）
     };
   },
   methods: {
@@ -24,7 +24,9 @@ export const loadMixin = {
     /**
      * 设置数据总数
      */
-    setDataTotal(dataTotal) { this.dataTotal = dataTotal },
+    setDataTotal(dataTotal) {
+      this.dataTotal = dataTotal;
+    },
     /**
      * 判断是否正在加载（是否上锁）
      */
@@ -35,10 +37,14 @@ export const loadMixin = {
     /**
      * 上锁
      */
-    locked() { this.isLoading = true; },
+    locked() {
+      this.isLoading = true;
+    },
     /**
      * 解锁
      */
-    unLocked() { this.isLoading = false; }
+    unLocked() {
+      this.isLoading = false;
+    }
   }
 };

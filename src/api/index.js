@@ -6,5 +6,8 @@ class Ajax {
   getHomeData() {
     return get(Url.homeDataApi);
   }
+  TestFor() {
+    return get(Url.TestApi);
+  }
 }
 export default new Ajax();

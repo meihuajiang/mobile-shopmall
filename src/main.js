@@ -11,7 +11,6 @@ import "@/assets/css/reset.css";
 import "@/assets/css/border.css";
 import "@/assets/css/index.css";
 
-
 require("./utils/adapter")(document, window);
 
 Vue.use(Lazyload);
