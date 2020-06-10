@@ -10,6 +10,8 @@ const User = () => import("@/pages/User");
 const Rank = () => import("@/pages/Rank");
 const GoodsDetails = () => import("@/pages/GoodsDetails");
 const Order = () => import("@/pages/Order");
+const CommentGoods = () => import("@/pages/CommentGoods");
+const CommentCenter = () => import("@/pages/CommentCenter");
 Vue.use(Router);
 /**
  * keepAlive 需要缓存的页面
@@ -56,16 +58,28 @@ const router = new Router({
       meta: { keepAlive: true, index: 7 }
     },
     {
-      path: "goodsDetails",
+      path: "/goodsDetails",
       name: "GoodsDetails",
       component: GoodsDetails,
-      meta: { keepAlive: true, index: 8}
+      meta: { keepAlive: true, index: 8 }
     },
     {
-      path: "order",
+      path: "/order",
       name: "Order",
       component: Order,
-      mate: { keepAlive: true, index: 9}
+      mate: { keepAlive: true, index: 9 }
+    },
+    {
+      path: "/commentGoods",
+      name: "CommentGoods",
+      component: CommentGoods,
+      mate: { keepAlive: true, index: 10 }
+    },
+    {
+      path: "/commentCenter",
+      name: "CommentCenter",
+      component: CommentCenter,
+      mate: { keepAlive: true, index: 10 }
     },
     { path: "*", redirect: { name: "Home" } }
   ]
@@ -80,7 +94,9 @@ const title = {
   User: "我的",
   Rank: "排行榜",
   GoodsDetails: "商品详情",
-  Order: "下单"
+  Order: "下单",
+  CommentGoods: "商品评价",
+  CommentCenter: "评价中心"
 };
 
 // 注册全局导航前置钩子用来拦截导航

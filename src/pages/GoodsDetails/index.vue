@@ -88,6 +88,11 @@ export default {
         name: "Order",
         query: { id: value }
       });
+    },
+    back() {
+      this.$router.push({
+        name: "Home"
+      });
     }
     /**
      * 首页滚动到底部 | 处理子组件派发的事件 | 重新计算 better-scroll

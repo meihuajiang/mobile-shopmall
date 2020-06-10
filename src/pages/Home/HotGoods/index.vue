@@ -63,7 +63,7 @@ export default {
           name: "解忧杂货店"
         }
       ]
-    }
+    };
   }
 };
 </script>

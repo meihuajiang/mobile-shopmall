@@ -2,25 +2,26 @@
   <ul>
     <li
       v-for="(item, index) in goodsList"
-      :key="item._id || item.id"
+      :key="item._id || item.id || item.book_id"
       class="goods-item"
       @click="goGoodsDetails(item)"
     >
       <!-- 左侧图片 -->
       <section class="left-img">
-        <img v-lazy="item.image || item.image_path" :onerror="defImg" />
+        <img v-lazy="item.image || item.book_img || item.image_path" :onerror="defImg" />
       </section>
       <!-- 右侧文本 -->
       <section class="right-txt">
         <p
           class="goods-name"
-          v-html="keyWordLight(item.name || item.goods_name, searchKeyword)"
+          v-html="keyWordLight(item.name || item.book_name||item.goods_name, searchKeyword)"
         ></p>
         <p class="goods-num">
           <span class="price" v-if="isOrderPaymentList"
             >￥{{ (item.present_price * item.buy_count).toFixed(2) }}</span
           >
-          <span class="price" v-else>￥{{ item.present_price }}</span>
+          <!--<span class="price" v-else>￥{{ item.present_price }}</span>-->
+          <span class="price" v-else>￥{{ item.price ||item.book_price }}</span>
           <span class="orl-price">{{ item.orl_price }}</span>
         </p>
       </section>

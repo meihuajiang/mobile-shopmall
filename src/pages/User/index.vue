@@ -134,6 +134,13 @@ export default {
   watch: {},
   created() {},
   methods: {
+    goOrderManage(status) {
+      if (status === 5) {
+        this.$router.push({ name: "CommentCenter" });
+        return;
+      }
+      this.$router.push({ name: "OrderManage", query: { status } });
+    },
     /**
      * 退出登录状态
      */

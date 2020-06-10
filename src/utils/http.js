@@ -109,7 +109,7 @@ export function get(url, params = {}) {
             console.log("get成功");
             // 请求成功
             resolve(res.data);
-            //console.log(res.data);
+            console.log(res.data);
           } else {
             // 请求错误
             reject(res);
@@ -143,7 +143,7 @@ export function post(url, data = {}) {
             // 请求成功
             console.log("请求成功");
             resolve(res.data);
-            //console.log(res.data);
+            console.log(res.data);
           } else {
             // 请求错误
             reject(res);

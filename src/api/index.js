@@ -9,5 +9,15 @@ class Ajax {
   TestFor() {
     return get(Url.TestApi);
   }
+  // 搜索 | POST
+  search(keyword, page = 1) {
+    return get(Url.searchApi, { keyword, page });
+  }
+  search1(name){
+    return get(Url.searchApi, { name });
+  }
+  getCategoryList(category_id) {
+    return get(Url.categorysListApi, { category_id });
+  }
 }
 export default new Ajax();

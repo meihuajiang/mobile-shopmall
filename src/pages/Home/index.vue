@@ -2,20 +2,30 @@
   <div>
     <!-- 顶部搜素 -->
     <header class="header">
-      <section class="city" @click="changeCity">{{ locationCity ? locationCity.data : "北京" }}</section>
+      <section class="city" @click="changeCity">
+        {{ locationCity ? locationCity.data : "北京" }}
+      </section>
       <section class="search-box">
         <van-icon name="search" class="search-icon" />
-        <input class="box" type="text" @focus="showSearch" placeholder="请输入搜索关键词" v-model="searchKeyword"/>
+        <!--改成@click效果更好-->
+        <input class="box" type="text" @click="showSearch" placeholder="请输入搜索关键词" v-model="searchKeyword"/>
         <van-icon name="clear" class="clear" @click="clearSearchInput" v-show="searchKeyword"/>
       </section>
       <!-- 取消 -->
       <transition name="cancel-bounce">
-        <section class="cancel" v-show="isShowSearch" @click="cancelSearch">取消</section>
+        <section class="cancel" v-show="isShowSearch" @click="cancelSearch">
+          取消
+        </section>
       </transition>
     </header>
     <!-- 内容区 -->
     <!--<section class="content" v-if="homeData" @touchstart.prevent="touchstart" @touchmove.prevent="touchmove" @touchend.prevent="touchend">-->
-    <section class="content"  @touchstart.prevent="touchstart" @touchmove.prevent="touchmove" @touchend.prevent="touchend">
+    <section
+      class="content"
+      @touchstart.prevent="touchstart"
+      @touchmove.prevent="touchmove"
+      @touchend.prevent="touchend"
+    >
       <b-scroll
         class="content-scroll"
         ref="homeScrollRef"
@@ -34,12 +44,13 @@
           <banner :slides="staticHomeDataSlides"></banner>
           <!-- 分类 -->
           <!--<category v-if="homeData.advertesPicture" :category="homeData.category" :advertesPicture="homeData.advertesPicture.PICTURE_ADDRESS"></category>-->
-          <category :category="staticHomeDataCategory" ></category>
+          <category :category="staticHomeDataCategory"></category>
           <!-- 推荐商品 -->
           <recommend :recommend="homeData.recommend"></recommend>
           <!-- 楼层商品 -->
           <div v-if="homeData.floorName">
-            <floor v-for="(item, index) in Object.keys(homeData.floorName)"
+            <floor
+              v-for="(item, index) in Object.keys(homeData.floorName)"
               :key="index"
               :floorName="homeData.floorName[item]"
               :floor="homeData[item]"
@@ -91,14 +102,24 @@ export default {
   name: "Home",
   mixins: [GoodsMixin, loadMixin],
   // eslint-disable-next-line vue/no-unused-components
-  components: { Banner, Category, Recommend, Floor, HotGoods, Search, Refresh, BScroll
+  components: {
+    Banner,
+    Category,
+    Recommend,
+    Floor,
+    HotGoods,
+    Search,
+    // eslint-disable-next-line vue/no-unused-components
+    Refresh,
+    BScroll
   },
   data() {
     return {
       homeData: {}, // 首页数据，正常写法
       staticHomeDataSlides: [
         {
-          image: "http://img63.ddimg.cn/upload_img/00785/ts0428_0510/1242x366-1587972958.jpg",
+          image:
+            "http://img63.ddimg.cn/upload_img/00785/ts0428_0510/1242x366-1587972958.jpg",
           goodsId: "b1195296679f482aa7d54d95ac2b4a94"
         },
         {
@@ -106,15 +127,18 @@ export default {
           goodsId: "b11sf4d1f510vd6a7d51vd5s1v165a14"
         },
         {
-          image: "http://img63.ddimg.cn/upload_img/00803/1/1242x366-1588053862.jpg",
+          image:
+            "http://img63.ddimg.cn/upload_img/00803/1/1242x366-1588053862.jpg",
           goodsId: "da34d6f381464a219b37a9ac0ad579e8"
         },
         {
-          image: "http://img60.ddimg.cn/upload_img/00817/ershoushu/100-1564985916.jpg",
+          image:
+            "http://img60.ddimg.cn/upload_img/00817/ershoushu/100-1564985916.jpg",
           goodsId: "ad176e397858448a854dc50371334faf"
         },
         {
-          image: "http://img60.ddimg.cn/upload_img/00478/0609/czs-750x315-1587892307.jpg",
+          image:
+            "http://img60.ddimg.cn/upload_img/00478/0609/czs-750x315-1587892307.jpg",
           goodsId: "ada1s639df58448a854dc5156165461d"
         },
         {
@@ -124,54 +148,54 @@ export default {
       ],
       staticHomeDataCategory: [
         {
-          mallCategoryId: "1",
+          mCategoryId: "1",
           image: require("@/assets/imgs/category1.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "2",
+          CategoryId: "2",
           image: require("@/assets/imgs/category2.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "3",
+          CategoryId: "3",
           image: require("@/assets/imgs/category3.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "4",
+          CategoryId: "4",
           image: require("@/assets/imgs/category4.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "5",
+          CategoryId: "5",
           image: require("@/assets/imgs/category5.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "6",
+          CategoryId: "6",
           image: require("@/assets/imgs/category6.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "7",
+          CategoryId: "7",
           image: require("@/assets/imgs/category7.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "8",
+          CategoryId: "8",
           image: require("@/assets/imgs/category8.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "9",
+          CategoryId: "9",
           image: require("@/assets/imgs/category9.png"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         },
         {
-          mallCategoryId: "10",
+          CategoryId: "10",
           image: require("@/assets/imgs/category10.jpg"),
-          mallCategoryName: "1"
+          CategoryName: "1"
         }
       ],
       probeType: 3, // 不仅在屏幕滑动的过程中，而且在 momentum 滚动动画运行过程中实时派发 scroll 事件
@@ -214,7 +238,11 @@ export default {
             this.page = 1;
             this._search(this.searchKeyword, false);
           }
-        }, 1000, 1000));
+        },
+        1000,
+        1000
+      )
+    );
   },
   destroyed() {
     // 注销 watch
@@ -276,19 +304,24 @@ export default {
       keyWord && !this.dataList.length && (this.searchStatus = true);
 
       try {
-        let res = await ajax.search(keyWord, this.page);
-        if (res.code === 200) {
-          this.setDataTotal(res.result.total); // 设置数据总数，方法在 loadMixin 中
-          // 判断是加载更多还是一次新的请求，方法在 loadMixin 中
-          isLoadMore
-            ? this.addMoreData(res.result.goodsList)
-            : (this.dataList = res.result.goodsList);
-          this.searchStatus = false;
-          // 解锁，方法在 loadMixin 中
-          this.unLocked();
-          // 判断是否无搜索结果 | 无结果则赋于 true
-          !this.dataList.length && (this.isEmptySearchResult = true);
-        }
+        //let res = await ajax.search(keyWord, this.page);
+        let res = await ajax.search1(keyWord);
+        console.log(res.result);
+        //if (res.code === 200) {
+        //console.log("hah");
+        this.setDataTotal(res.result.total); // 设置数据总数，方法在 loadMixin 中
+        // 判断是加载更多还是一次新的请求，方法在 loadMixin 中
+        isLoadMore
+          ? //? this.addMoreData(res.result.goodsList)
+            this.addMoreData(res.result)
+          : //: (this.dataList = res.result.goodsList);
+            (this.dataList = res.result);
+        this.searchStatus = false;
+        // 解锁，方法在 loadMixin 中
+        this.unLocked();
+        // 判断是否无搜索结果 | 无结果则赋于 true
+        !this.dataList.length && (this.isEmptySearchResult = true);
+        //}
       } catch (error) {
         this.searchStatus = false;
         // 解锁，方法在 loadMixin 中
