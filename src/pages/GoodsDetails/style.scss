@@ -9,11 +9,12 @@ $color:#F79709;
     bottom: 13.5vw;
     overflow: hidden;
   }
+  .van-goods-action{
+    position:fixed;
+    bottom: 0;
+  }
 }
-.van-goods-action{
-  position:fixed;
-  bottom: 0;
-}
+
 #swiper-wrapper {
   width: 100%;
   height: 95%;
@@ -21,9 +22,14 @@ $color:#F79709;
   overflow: scroll;
 }
 
-img{
+#picture{
   width: 100%;
-  height: auto;
+  height: 400px;
+  overflow: hidden;
+  img{
+    width: 100%;
+    height: auto;
+  }
 }
 
 .name {
@@ -34,23 +40,28 @@ img{
   white-space: nowrap;
 }
 
-.price {
+.detail {
+  width: 90%;
   padding: 5px 0 0 7.5px;
   color:$color;
   .code { font-size: 29px; }
-  .mall-price { font-size: 30px; }
-  .min-price {
-    font-size: 24px;
-    text-decoration: line-through;
-    color: #999;
+  .price {
+    font-size: 30px;
     display: inline-block;
     margin-left: 5px;
   }
+  .count{
+    float: right;
+    right: 5px;
+    color: #999;
+  }
 }
+
 
 .text{
   padding: 5px 0 0 7.5px;
-  font-size: 20px;
+  font-size: 18px;
+  color: #999;
 }
 
 .title{
@@ -68,6 +79,7 @@ img{
   line-height: 35px;
   padding-top:10px;
   padding-left: 5px;
+  margin-bottom: -8px;
   font-size: 15px;
 }
 
@@ -76,6 +88,17 @@ img{
   padding-bottom: 10px;
   font-size: 15px;
   border-bottom: 2px solid #eee;
+}
+
+.stars{
+  width: 80px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+#blank{
+  height: 50px;
+  width: 100%;
 }
 
 #button{
@@ -105,3 +128,5 @@ img{
   border-width:0px;
   background-color:orangered;
 }
+
+

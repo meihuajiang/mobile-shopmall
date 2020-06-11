@@ -1,132 +1,106 @@
 <template>
-  <div id="cart">
+  <div class="cart">
     <topbar title="购物车" hasBack></topbar>
-    <section
-      class="content"
-      @touchstart.prevent="touchstart"
-      @touchmove.prevent="touchmove"
-      @touchend.prevent="touchend"
-    >
-      <b-scroll
-        class="content-scroll"
-        ref="cartScrollRef"
-        :listenScroll="listenScroll"
-        :probeType="probeType"
-        :pullup="true"
-        :bounce="bounce"
-        v-on:scroll="cartScroll"
-        v-on:scrollEnd="cartScrollEnd"
-      >
-        <section class="cartMain">
-          <div class="cartMain_hd">
-            <ul class="order_lists cartTop">
-              <li class="list_chk">
-                <!--所有商品全选-->
-                <input
-                  type="checkbox"
-                  id="all"
-                  class="whole_check"
-                  @click="cartChoose()"
-                />
-                <label for="all" :class="status ? 'mark' : ''">全选</label>
-              </li>
-              <!--<li class="list_con">商品信息</li>
-          <li class="list_info">商品参数</li>
-          <li class="list_price">单价</li>
-          <li class="list_amount">数量</li>
-          <li class="list_sum">金额</li>
-          <li class="list_op">操作</li>-->
+    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit" />
+    <div class="scroll-wrapper">
+      <b-scroll class="content-scroll" :data="List">
+        <div class="container">
+          <section class="cartMain">
+            <ul v-if="list.length > 0">
+              <div class="cartBox" v-for="(item, index) in list" :key="index">
+                <van-row>
+                  <van-col type="flex" justify="space-between">
+                    <van-checkbox
+                      v-model="result"
+                      name="item"
+                      ref="checkboxes"
+                      checked-color="#F79709"
+                      @click="choose(item)"
+                    ></van-checkbox>
+                  </van-col>
+                  <van-card
+                    style="margin-left:35px;"
+                    :num="item.num"
+                    :price="item.price"
+                    :desc="item.text"
+                    :thumb="item.image"
+                    :title="item.title"
+                    origin-price="16.80"
+                  >
+                    <div slot="tags">
+                      <van-button
+                        plain
+                        size="mini"
+                        type="danger"
+                        @click="deleteCommodity(item)"
+                        >移除</van-button
+                      >
+                    </div>
+                    <div slot="footer">
+                      <van-button size="mini" @click="reduce(item)"
+                        >-</van-button
+                      >
+                      <van-tag type="primary" plain="true" size="large">{{
+                        item.num
+                      }}</van-tag>
+                      <van-button size="mini" @click="add(item)">+</van-button>
+                    </div>
+                  </van-card>
+                </van-row>
+              </div>
             </ul>
-          </div>
-          <br /><br />
-          <div class="cartBox" v-for="(item, index) in list" :key="index">
-            <!--        <div class="order_content">-->
-            <!--          <ul class="order_lists" v-for="pro in item.products">-->
-            <li class="list_chk">
-              <input
-                type="checkbox"
-                id="checkbox_2"
-                class="son_check"
-                @click="choose(item)"
-              />
-              <a for="checkbox_2" :class="item.checked ? 'mark' : ''"></a>
-            </li>
-            <li class="list_con">
-              <div class="list_img">
-                <a href="javascript:;"><img :src="item.imgUl" alt=""/></a>
-              </div>
-              <div class="list_text">
-                <a href="javascript:;">{{ item.title }}</a>
-                <span class="list_custom"></span>
-              </div>
-            </li>
-            <li class="list_price">
-              <p class="price">单价：￥{{ item.price }}</p>
-              <div class="charge">
-                <p>更多促销</p>
-              </div>
-            </li>
-            <li class="list_amount">
-              <div class="amount_box">
-                <a
-                  href="javascript:;"
-                  class="reduce reSty"
-                  @click="reduce(item)"
-                  >数量：-</a
-                >
-                <input type="text" v-model="item.num" class="sum" />
-                <a href="javascript:;" class="plus" @click="add(item)">+</a>
-              </div>
-            </li>
-            <li class="list_sum">
-              <p class="sum_price">商品金额：￥{{ item.sum }}</p>
-            </li>
-            <li class="list_op">
-              <p class="collect">
-                <a href="javascript:;" class="colBtn">加入收藏夹</a>
-              </p>
-              <p class="del">
-                <a href="javascript:;" class="delBtn">移除该商品</a>
-              </p>
-            </li>
-            <br /><br /><br />
-            <!--          </ul>-->
-            <!--        </div>-->
-          </div>
-
-          <br /><br />
-          <!--底部-->
-          <div class="bar-wrapper">
-            <div class="bar-right">
-              <div class="piece">
-                已选商品<strong class="piece_num">{{ this.allnum }}</strong
-                >件
-              </div>
-              <div class="totalMoney">
-                共计: <strong class="total_text">￥{{ this.allsum }}</strong>
-              </div>
-              <div class="calBtn"><a href="javascript:;">去结算</a></div>
+            <div class="nohaveshop" v-else>
+              <van-icon name="shopping-cart-o" />
+              <p class="p1">你的购物车空空如也~~</p>
+              <p class="p2">快去采购吧!</p>
             </div>
-          </div>
-        </section>
-        <section class="model_bg"></section>
-        <section class="my_model">
-          <p class="title">删除宝贝<span class="closeModel"></span></p>
-          <p>您确认要删除该宝贝吗？</p>
-          <div class="opBtn">
-            <a href="javascript:;" class="dialog-sure">确定</a>
-            <br />
-            <a href="javascript:;" class="dialog-close">关闭</a>
-          </div>
-        </section>
+
+          </section>
+        </div>
       </b-scroll>
-    </section>
+    </div>
+    <!--底部-->
+    <van-submit-bar
+      :price="allsum * 100"
+      button-text="去结算"
+      @submit="onSubmit"
+    >
+      <!-- 全选按钮 -->
+      <van-checkbox
+        v-model="checkedAll"
+        @click="cartChoose"
+        checked-color="#F79709"
+        >全选</van-checkbox
+      >
+    </van-submit-bar>
+
+    <van-goods-action>
+      <van-goods-action-icon
+              icon="chat-o"
+              text="评价"
+              @click="goCommentGoods(item.id,item,id,item.count)"
+      />
+      <van-goods-action-icon icon="cart-o" text="购物车" />
+      <van-goods-action-button
+              type="warning"
+              text="加入购物车"
+              @click="cart()"
+      />
+      <van-goods-action-button
+              type="danger"
+              text="立即购买"
+              @click="jump(item.id)"
+      />
+    </van-goods-action>
   </div>
 </template>
 
 <script>
 import Topbar from "@/components/TopBar";
 import BScroll from "@/components/BScroll";
+import { post } from "../../utils/http";
+import { Toast } from "vant";
+// import { SubmitBar } from 'vant';
 export default {
   components: {
     Topbar,
@@ -147,84 +121,137 @@ export default {
       translateY: 0,
       rotate: 0,
       opac: 0,
-      list: [
-        {
-          title: "李清照传",
-          text: "4377人评价",
-          price: 99,
-          imgUrl: "./static/img/coll-r-2.jpg",
-          link: "http://product.dangdang.com/24166592.html#ddclick_reco_book",
-          num: 1,
-          sum: 99,
-          checked: false //商品选中状态
-        },
-        {
-          title: "哈利·波特与被诅咒的孩子",
-          text: "“哈利·波特”第八个故事中文版震撼来袭！特别彩排版剧本！",
-          price: 29.37,
-          imgUrl: "./static/img/m-c-1.png",
-          link: "http://product.dangdang.com/25583206.html",
-          num: 1,
-          sum: 29.37,
-          checked: false
-        },
-        {
-          title: "云边有个小卖部",
-          text: "2381人评价",
-          price: 49,
-          imgUrl: "./static/img/parts-r-1.jpg",
-          link: "http://product.dangdang.com/25295369.html",
-          num: 1,
-          sum: 49,
-          checked: false
-        },
-        {
-          title: "空间简史",
-          text: "434人好评",
-          price: 29,
-          imgUrl: "./static/img/rec-1.jpg",
-          link: "http://product.dangdang.com/25546541.html",
-          num: 1,
-          sum: 29,
-          checked: false
-        },
-        {
-          title: "夏目友人帐",
-          text: "只要有想见的人，就不再会是孤身一人了",
-          price: 29,
-          imgUrl: "./static/img/xiamu.png",
-          link: "http://product.dangdang.com/24017532.html",
-          num: 1,
-          sum: 29,
-          checked: false
-        },
-        {
-          title: " 龙族3黑月之潮·下",
-          text: "我们都是小怪兽，都将被正义的奥特曼，杀死！",
-          price: 149,
-          imgUrl: "./static/img/intel-r-1.jpg",
-          link:
-            "http://product.dangdang.com/23414990.html#ddclick_http://book.dangdang.com/01.01.htm",
-          num: 1,
-          img: "./static/img/intel-r-1.jpg",
-          sum: 149,
-          checked: false
-        },
-        {
-          title: "你当像鸟飞往你的山",
-          text: "我们要背叛多少曾经，才能找到真正的自我！",
-          price: 39,
-          imgUrl: "./static/img/nidangxiangniao.png",
-          link: "http://product.dangdang.com/28473192.html",
-          num: 1,
-          img: "./images/7.png",
-          sum: 39,
-          checked: false
-        }
-      ]
+      user: {
+        id: "123456",
+        name: "张三",
+        phone: "123456789",
+        address: "广东省广州市番禺区华南理工大学"
+      },
+      commodity_list: [],
+      list: [],
+      result: [],
+      safeAreaInsetBottom: true,
+      checkedAll: true
     };
   },
+  created() {
+    try {
+      post("https://af2pds.toutiao15.com/get_cart", {
+        user_id: "123456"
+      }).then(response => {
+        var result = response.cart;
+        console.log(result);
+        result.forEach(item => {
+          post("https://af2pds.toutiao15.com/get_commodity_byid", {
+            id: item.commodity_id
+          }).then(response => {
+            console.log(response);
+            var commodity = {
+              commodityId: response.content._id,
+              price: response.content.commodity_price,
+              title: response.content.commodity_name,
+              num: 1,
+              sum: response.content.commodity_price,
+              checked: false,
+              text: response.content.commodity_detail,
+              image: response.content.commodity_photo
+            };
+            console.log(commodity);
+            this.list.push(commodity);
+          });
+        });
+      });
+    } catch (error) {
+      return {
+        error: error.massage
+      };
+    }
+  },
+
   methods: {
+    onSubmit() {
+      var listCopy = this.list.concat();
+      for (var a = 0; a < listCopy.length; a++) {
+        console.log("out" + String(a) + listCopy[a].checked);
+      }
+      for (var i = 0; i < listCopy.length; i++) {
+        console.log(String(i) + listCopy[i].checked);
+        if (listCopy[i].checked) {
+          try {
+            post("https://af2pds.toutiao15.com/delete_cart", {
+              user_id: this.user.id,
+              commodity_id: listCopy[i]._id
+            }).then(response => {
+              if (!response.result) {
+                //alert
+                Toast("下单失败！");
+              }
+            });
+          } catch (error) {
+            return {
+              error: error.massage
+            };
+          }
+          try {
+            post("https://af2pds.toutiao15.com/update_commodity_num", {
+              id: listCopy[i].commodityId,
+              count: listCopy[i].num
+            });
+            post("https://af2pds.toutiao15.com/add_order", {
+              uid: this.user.id,
+              user_name: this.user.name,
+              user_phone: this.user.phone,
+              aid: this.user.address,
+              cid: listCopy[i].commodityId,
+              count: listCopy[i].num,
+              money: listCopy[i].sum,
+              state: 2
+            }).then(response => {
+              console.log(response);
+              if (!response.result) alert("下单失败！");
+            });
+          } catch (e) {
+            //alert
+            Toast("下单失败！");
+            return;
+          }
+          for (var j = 0; j < this.list.length; j++) {
+            if (this.list[j].title == listCopy[i].title) {
+              this.list.splice(j, 1);
+            }
+          }
+        }
+      }
+      //alert
+      Toast("下单成功！");
+      this.allsum = 0;
+      this.allnum = 0;
+    },
+    deleteCommodity(item) {
+      for (var i = 0; i < this.list.length; i++) {
+        if (this.list[i].title == item.title) {
+          this.list.splice(i, 1);
+        }
+      }
+      try {
+        post("https://af2pds.toutiao15.com/delete_cart", {
+          user_id: "123456",
+          commodity_id: item._id
+        }).then(response => {
+          if (response.result) {
+            Toast("删除成功!");
+          }
+        });
+      } catch (error) {
+        return {
+          error: error.massage
+        };
+      }
+      if (item.checked) {
+        this.allsum -= item.sum;
+        this.allnum -= item.sum;
+      }
+    },
     //选中某件商品
     chooseTrue(item) {
       item.checked = true; //将该商品标记为已选
@@ -240,10 +267,12 @@ export default {
     },
     choose(item) {
       !item.checked ? this.chooseTrue(item) : this.chooseFalse(item);
-      item = 5;
+      //item = 5;
     },
     //全选购物车
     cartChoose() {
+      // this.$refs.checkboxGroup.toggleAll(true);
+      //this.$refs.checkboxGroup.toggleAll(true);
       this.status = !this.status; //取反改变状态
       this.status
         ? this.list.forEach(item => this.choose(item))

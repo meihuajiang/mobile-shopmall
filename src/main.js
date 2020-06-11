@@ -10,8 +10,17 @@ FastClick.attach(document.body);
 import "@/assets/css/reset.css";
 import "@/assets/css/border.css";
 import "@/assets/css/index.css";
+import globalVariable from "./pages/Login/log.js";
 
 require("./utils/adapter")(document, window);
+
+Vue.prototype.global = globalVariable;
+Vue.prototype.change_log_state = function(s) {
+  this.global.log_state = s;
+};
+Vue.prototype.change_log_id = function(s) {
+  this.global.log_id = s;
+};
 
 Vue.use(Lazyload);
 Vue.use(Vant);

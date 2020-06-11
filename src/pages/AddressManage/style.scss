@@ -1,0 +1,20 @@
+$color: #F79709;
+
+.address{ 
+  .addrlist {
+    position: relative;
+    padding: 5px;
+    align-items: center;
+    position: relative;
+    .van-address-list {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .van-nav-bar {
+      color: #7d7e80;
+      .left-arrow{
+        color: #7d7e80;
+      }
+    }
+  }
+}

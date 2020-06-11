@@ -12,6 +12,12 @@ const GoodsDetails = () => import("@/pages/GoodsDetails");
 const Order = () => import("@/pages/Order");
 const CommentGoods = () => import("@/pages/CommentGoods");
 const CommentCenter = () => import("@/pages/CommentCenter");
+const AddressManage = () => import("@/pages/AddressManage");
+const AddressEdit = () => import("@/pages/AddressEdit");
+const AddressAdd = () => import("@/pages/AddressAdd");
+const OrdersDetails = () => import("@/pages/OrderDetails");
+const OrderManage = () => import("@/pages/OrderManage");
+
 Vue.use(Router);
 /**
  * keepAlive 需要缓存的页面
@@ -81,6 +87,37 @@ const router = new Router({
       component: CommentCenter,
       mate: { keepAlive: true, index: 10 }
     },
+    {
+      path: "/addressManage",
+      name: "AddressManage",
+      component: AddressManage,
+      mate: { keepAlive: true, index: 11}
+    },
+    {
+      path: "/addressAdd",
+      name: "AddressAdd",
+      component: AddressAdd,
+      mate: { keepAlive: true, index: 12}
+    },
+    {
+      path: "/addressEdit",
+      name: "AddressEdit",
+      component: AddressEdit,
+      mate: { keepAlive: true, index: 13}
+    },
+    {
+      path: "/OrderManage",
+      name: "OrderManage",
+      component: OrderManage,
+      meta: { keepAlive: true, index: 14 }
+    },
+    {
+      path: "/OrdersDetails",
+      name: "OrdersDetails",
+      component: OrdersDetails,
+      meta: { keepAlive: true, index: 15 }
+    },
+
     { path: "*", redirect: { name: "Home" } }
   ]
 });
@@ -96,7 +133,9 @@ const title = {
   GoodsDetails: "商品详情",
   Order: "下单",
   CommentGoods: "商品评价",
-  CommentCenter: "评价中心"
+  CommentCenter: "评价中心",
+  OrdersDetails: "订单详情",
+  OrderManage: "订单管理"
 };
 
 // 注册全局导航前置钩子用来拦截导航

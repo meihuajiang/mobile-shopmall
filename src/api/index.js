@@ -13,11 +13,23 @@ class Ajax {
   search(keyword, page = 1) {
     return get(Url.searchApi, { keyword, page });
   }
-  search1(name){
-    return get(Url.searchApi, { name });
+  search1(name) {
+    return get(Url.searchApi1, { name });
   }
   getCategoryList(category_id) {
     return get(Url.categorysListApi, { category_id });
+  }
+  getOrderList(userid) {
+    return get(Url.getOrderListApi, { userid });
+  }
+  getOrder(id) {
+    return get(Url.getOrderApi, { id });
+  }
+  getCommodity(id) {
+    return get(Url.getCommodityApi, { id });
+  }
+  getUseridById(id) {
+    return get(Url.getUseridByIdApi, { id });
   }
 }
 export default new Ajax();

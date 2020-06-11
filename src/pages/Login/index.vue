@@ -1,25 +1,25 @@
 <template>
-  <div>
-    <h1 class="login">这里是登录页面</h1>
-    <ul>
-      <li
-        class="hot-goods-item"
-        v-for="item of info"
-        :key="item._id"
-      >
-        <img
-          v-lazy="item.image"
-          height="180"
-          width="300"
-          class="hot-goods-img"
+  <div id>
+    <van-nav-bar title="Please Log In" />
+    <form id="login">
+      <van-cell-group>
+        <van-field
+          v-model="id"
+          label="账号"
+          placeholder="Please input your id"
         />
-        <p class="name">{{ item.name }}</p>
-        <p class="price">
-          <span class="code">￥</span>
-          <span class="min-price">{{ item.price }}</span>
-        </p>
-      </li>
-    </ul>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          v-model="password"
+          label="密码"
+          placeholder="Please input password"
+        />
+      </van-cell-group>
+      <van-button type="primary" size="large" v-on:click="try_to_log()"
+        >提交</van-button
+      >
+    </form>
   </div>
 </template>
 
@@ -28,48 +28,53 @@
 import { get, post } from "@/utils/http";
 // eslint-disable-next-line no-unused-vars
 import ajax from "@/api";
+import Vue from "vue";
+import { Toast } from "vant";
+import { Field } from "vant";
+import { Button } from "vant";
+import { NavBar } from "vant";
+Vue.use(Toast);
+Vue.use(Field);
+Vue.use(Button);
+Vue.use(NavBar);
 export default {
   name: "index",
   data() {
     return {
-      info: null
+      id: "",
+      password: ""
     };
   },
-  created() {
-    this._getData();
-  },
-  /*mounted() {
-    try {
-      // 发出一个 POST 请求，并设置请求体
-      // 请注意将示例中的 URL 地址和参数更换为你的真实请求地址和参数
-      const result = post(
-        "https://afgwgu.toutiao15.com/searchTest",{name:"p"}
-      ).then(response => (this.info = response));
-      console.log(result.result);
-      return result.result;
-    } catch (error) {
-      return {
-        error: error.message
-      };
-    }
-  },*/
   methods: {
-    async _getData() {
-      try {
-        //let res = await ajax.TestFor();
-        let res = await ajax.search1("p");
-        //if (res.code === 200){
-        console.log(res.code);
-        this.info = res.result;
-        console.log(res.result);
-        //}
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
+    try_to_log: function() {
+      var xmlhttprequest = new XMLHttpRequest();
+      xmlhttprequest.open(
+        "POST",
+        "https://af2pds.toutiao15.com/get_user",
+        false
+      );
+      xmlhttprequest.setRequestHeader("CORS", "Access-Control-Allow-Origin");
+      xmlhttprequest.setRequestHeader("content-type", "application/json");
+      xmlhttprequest.send(
+        JSON.stringify({ id: this.id, password: this.password })
+      );
+      var result = JSON.parse(xmlhttprequest.response);
+      if (result.result === false) {
+        Toast("账号或密码错误");
+        this.id = "";
+        this.password = "";
+      } else {
+        this.change_log_state(true);
+        this.change_log_id(result.user_id);
+        //跳转到其他页面
       }
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#login {
+  top: 20%;
+}
+</style>

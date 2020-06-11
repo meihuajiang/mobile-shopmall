@@ -44,7 +44,7 @@ export default {
         {
           mallPrice: 23.90,
           image: require("@/assets/imgs/xiamu.png"),
-          goodsId: "2",
+          goodsId: "5ee043a9f6a000000a7b191b",
           price: 23.90,
           name: "夏目友人帐"
         },

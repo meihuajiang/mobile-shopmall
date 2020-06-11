@@ -4,10 +4,7 @@
     <!-- 头像 用户名 -->
     <section class="user-info" v-if="!userToken || !userInfo">
       <!--<section class="user-info">-->
-      <img
-        class="avatar"
-        src="../../assets/imgs/avatar.jpg"
-      />
+      <img class="avatar" src="../../assets/imgs/avatar.jpg" />
       <p @click="$router.push({ name: 'Login' })">登录 / 注册</p>
     </section>
     <section class="user-info" v-else>
@@ -22,7 +19,7 @@
       <div class="order-index-list">
         <section
           class="order-all"
-          @click="$router.push({ name: 'OrderManage' })"
+          @click="$router.push({ name: 'OrderManage', params: { status: 0 } })"
         >
           <span>订单管理</span>
           <van-icon class="icon" name="arrow" />
@@ -48,9 +45,9 @@
     <!-- 其他：收藏商品、地址管理、最近浏览 -->
     <section class="other-entry">
       <!-- 收藏商品 -->
-      <div class="collection" @click="$router.push({ name: 'Collection' })">
+      <div class="collection" @click="$router.push({ name: 'CommentCenter' })">
         <van-icon class="small-icon" name="star-o" />
-        <span>收藏商品</span>
+        <span>评价中心</span>
         <van-icon class="arrow-icon" name="arrow" />
       </div>
       <!-- 地址管理 -->
@@ -134,17 +131,23 @@ export default {
   watch: {},
   created() {},
   methods: {
+    /*
     goOrderManage(status) {
       if (status === 5) {
         this.$router.push({ name: "CommentCenter" });
         return;
       }
       this.$router.push({ name: "OrderManage", query: { status } });
-    },
+    },*/
     /**
      * 退出登录状态
      */
-    logout() {}
+    logout() {},
+    goOrderManage(sta) {
+      if (sta !== 5) {
+        this.$router.push({ name: "OrderManage", params: { status: sta } });
+      }
+    }
   }
 };
 </script>
