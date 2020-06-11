@@ -10,11 +10,19 @@ FastClick.attach(document.body);
 import "@/assets/css/reset.css";
 import "@/assets/css/border.css";
 import "@/assets/css/index.css";
+import globalVariable from './pages/Login/log.js'
 
 require("./utils/adapter")(document, window);
 
 Vue.use(Lazyload);
 Vue.use(Vant);
+Vue.prototype.global = globalVariable;
+Vue.prototype.global.change_log_state = function(s){
+  log_state = s;
+}
+Vue.prototype.global.change_log_id = function(s){
+  log_id = s;
+}
 
 Vue.config.productionTip = false;
 // 定义全局过滤器
