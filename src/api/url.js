@@ -8,7 +8,7 @@ export const Url = {
   getOrderListApi: "https://af2pds.toutiao15.com/get_orderlist_byid",
   getOrderApi: "https://af2pds.toutiao15.com/get_order_byid",
   getCommodityApi: "https://af2pds.toutiao15.com/get_commodity_byid",
-  getUseridByIdApi: "https://af2pds.toutiao15.com/get_userid_byid"
-
+  getUseridByIdApi: "https://af2pds.toutiao15.com/get_userid_byid",
+  getUser: "https://af2pds.toutiao15.com/get_user"
   //TestApi: "https://afgwgu.toutiao15.com/findOneFromGoodsTable
 };

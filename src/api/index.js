@@ -31,5 +31,11 @@ class Ajax {
   getUseridById(id) {
     return get(Url.getUseridByIdApi, { id });
   }
+  getUser(id, password) {
+    return get(Url.getUser,{id,password})
+  }
+  login(id, password) {
+    return get(Url.getUser,{id,password})
+  }
 }
 export default new Ajax();

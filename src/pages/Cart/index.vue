@@ -1,19 +1,34 @@
 <template>
   <div class="cart">
     <topbar title="购物车" hasBack></topbar>
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit" />
     <div class="scroll-wrapper">
       <b-scroll class="content-scroll" :data="List">
         <div class="container">
           <section class="cartMain">
+            <!--底部-->
+            <van-submit-bar
+              :disabled="allnum == 0"
+              :price="allsum * 100"
+              button-text="去结算"
+              @submit="onSubmit"
+              safe-area-inset-bottom="true"
+            >
+              <!-- 全选按钮 -->
+              <van-checkbox
+                v-model="checkedAll"
+                @click="cartChoose"
+                style="padding: 0 0px"
+                checked-color="#F79709"
+                >全选</van-checkbox
+              >
+            </van-submit-bar>
             <ul v-if="list.length > 0">
               <div class="cartBox" v-for="(item, index) in list" :key="index">
                 <van-row>
                   <van-col type="flex" justify="space-between">
                     <van-checkbox
                       v-model="result"
-                      name="item"
-                      ref="checkboxes"
+                      ref="checkboxGroup"
                       checked-color="#F79709"
                       @click="choose(item)"
                     ></van-checkbox>
@@ -54,44 +69,29 @@
               <p class="p1">你的购物车空空如也~~</p>
               <p class="p2">快去采购吧!</p>
             </div>
-
+            <br /><br />
+            <br /><br />
           </section>
         </div>
       </b-scroll>
     </div>
-    <!--底部-->
+
     <van-submit-bar
-      :price="allsum * 100"
-      button-text="去结算"
-      @submit="onSubmit"
+            :disabled="allnum == 0"
+            :price="allsum * 100"
+            button-text="去结算"
+            @submit="onSubmit"
+            safe-area-inset-bottom="true"
     >
       <!-- 全选按钮 -->
       <van-checkbox
-        v-model="checkedAll"
-        @click="cartChoose"
-        checked-color="#F79709"
-        >全选</van-checkbox
+              v-model="checkedAll"
+              @click="cartChoose"
+              style="padding: 0 0px"
+              checked-color="#F79709"
+      >全选</van-checkbox
       >
     </van-submit-bar>
-
-    <van-goods-action>
-      <van-goods-action-icon
-              icon="chat-o"
-              text="评价"
-              @click="goCommentGoods(item.id,item,id,item.count)"
-      />
-      <van-goods-action-icon icon="cart-o" text="购物车" />
-      <van-goods-action-button
-              type="warning"
-              text="加入购物车"
-              @click="cart()"
-      />
-      <van-goods-action-button
-              type="danger"
-              text="立即购买"
-              @click="jump(item.id)"
-      />
-    </van-goods-action>
   </div>
 </template>
 
@@ -128,10 +128,7 @@ export default {
         address: "广东省广州市番禺区华南理工大学"
       },
       commodity_list: [],
-      list: [],
-      result: [],
-      safeAreaInsetBottom: true,
-      checkedAll: true
+      list: []
     };
   },
   created() {
@@ -183,8 +180,7 @@ export default {
               commodity_id: listCopy[i]._id
             }).then(response => {
               if (!response.result) {
-                //alert
-                Toast("下单失败！");
+                alert("下单失败！");
               }
             });
           } catch (error) {
@@ -211,8 +207,7 @@ export default {
               if (!response.result) alert("下单失败！");
             });
           } catch (e) {
-            //alert
-            Toast("下单失败！");
+            alert("下单失败！");
             return;
           }
           for (var j = 0; j < this.list.length; j++) {
@@ -222,8 +217,7 @@ export default {
           }
         }
       }
-      //alert
-      Toast("下单成功！");
+      alert("下单成功！");
       this.allsum = 0;
       this.allnum = 0;
     },
